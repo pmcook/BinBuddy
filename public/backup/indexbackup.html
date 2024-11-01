@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Storage System</title>
+    <link rel="stylesheet" href="styles.css"> <!-- Optional: Link to your CSS file -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>Storage System</h1>
+
+        <h2>Add Item</h2>
+        <form id="addItemForm">
+            <input type="text" id="itemName" placeholder="Item Name" required>
+            <input type="text" id="itemLocation" placeholder="Location (e.g., A6)" required>
+            <input type="file" id="itemImage" required>
+            <button type="submit">Add Item</button>
+        </form>
+
+        <h2>Items List</h2>
+        <div id="itemsGrid" class="items-grid">
+            <!-- Items will be displayed here -->
+        </div>
+    </div>
+
+    <script>
+        // Function to fetch and display items
+        function fetchItems() {
+            $.get('/items', function(data) {
+                $('#itemsGrid').empty(); // Clear previous items
+                data.forEach(item => {
+                    const itemElement = `
+                        <div class="item-card">
+                            <img src="${item.imageUrl}" alt="${item.name}" />
+                            <h3>${item.name}</h3>
+                            <p>Location: ${item.location}</p>
+                            <button onclick="deleteItem('${item._id}')">Delete</button>
+                        </div>
+                    `;
+                    $('#itemsGrid').append(itemElement);
+                });
+            });
+        }
+
+        // Function to handle adding an item
+        $('#addItemForm').on('submit', function(event) {
+            event.preventDefault(); // Prevent form submission
+            const formData = new FormData();
+            formData.append('name', $('#itemName').val());
+            formData.append('location', $('#itemLocation').val());
+            formData.append('image', $('#itemImage')[0].files[0]);
+
+            $.ajax({
+                url: '/items',
+                type: 'POST',
+                data: formData,
+                contentType: false,
+                processData: false,
+                success: function() {
+                    fetchItems(); // Refresh the item list
+                    $('#addItemForm')[0].reset(); // Clear the form
+                }
+            });
+        });
+
+        // Function to delete an item
+        function deleteItem(itemId) {
+            $.ajax({
+                url: `/items/${itemId}`,
+                type: 'DELETE',
+                success: function() {
+                    fetchItems(); // Refresh the item list
+                }
+            });
+        }
+
+        // Initial fetch of items
+        fetchItems();
+    </script>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        h1, h2 {
+            color: #333;
+        }
+
+        form {
+            margin-bottom: 20px;
+        }
+
+        input[type="text"], input[type="file"] {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button {
+            padding: 10px 15px;
+            background-color: #28a745;
+            border: none;
+            color: white;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #218838;
+        }
+
+        .items-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .item-card {
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 10px;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .item-card img {
+            max-width: 100%;
+            border-radius: 4px;
+            height: auto;
+        }
+    </style>
+</body>
+</html>
