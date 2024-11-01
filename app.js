@@ -15,7 +15,8 @@ app.use('/uploads', express.static('uploads'));
 // Connect to MongoDB
 mongoose.connect('mongodb://localhost:27017/mydatabase', { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => console.log('Connected to MongoDB'))
-  .catch(err => console.error('MongoDB connection error:', err));
+  .then(() => console.log('To close type CTRL-C'))
+  .catch(err => console.error('MongoDB connection error, is it running?:', err));
 
 // Routes
 app.use('/items', itemsRouter);
