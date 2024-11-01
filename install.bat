@@ -1,7 +1,7 @@
 @echo off
 
 :: Clone the repository
-git clone <repository-url> BinBuddy
+git clone https://github.com/pmcook/BinBuddy
 
 :: Change to the project directory
 cd BinBuddy
