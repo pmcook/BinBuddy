@@ -80,3 +80,9 @@ If you encounter issues:
 
 MongoDB connection error: Ensure MongoDB is running on localhost:27017.
 Dependencies: Run npm install again to ensure all dependencies are properly installed.
+
+
+## Things to add
+
+- export excel back automatically 
+- adding diffrent locations
