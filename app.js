@@ -43,6 +43,8 @@ if (!fs.existsSync(uploadsDir)) {
 app.get('/export-database', async (req, res) => {
   try {
     const items = await Item.find();
+    const date = new Date();
+    const formattedDate = date.toISOString().split('T')[0]; // Formats to YYYY-MM-DD
 
     // Initialize a new workbook and worksheet
     const workbook = new ExcelJS.Workbook();
@@ -67,13 +69,13 @@ app.get('/export-database', async (req, res) => {
     });
 
     // Path for the export file
-    const filePath = path.join(__dirname, 'uploads', 'database-export.xlsx');
+    const filePath = path.join(__dirname, 'uploads', `database-export-${formattedDate}.xlsx`);
 
     // Write Excel file to the specified path
     await workbook.xlsx.writeFile(filePath);
 
     // Send the file to the client for download
-    res.download(filePath, 'database-export.xlsx', (err) => {
+    res.download(filePath, `database-export-${formattedDate}.xlsx`, (err) => {
       if (err) {
         console.error('Error during file download:', err);
         res.status(500).send('Error downloading the file');

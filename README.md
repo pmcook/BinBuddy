@@ -91,7 +91,7 @@ Required programs: check mongo, git and node are all installed.
 - Export excel back automatically 
 - Adding different locations
 - Website design 
-- Add a confirmation of upload
+- ~~Add a confirmation of upload~~
 
 ## Future project
 

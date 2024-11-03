@@ -5,6 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Storage System</title>
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="styles.css"> <!-- Optional: Link to your CSS file -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <!-- Add Font Awesome -->
@@ -261,8 +263,8 @@
                     fetchItems(); // Refresh the item list
                     $('#addItemForm')[0].reset(); // Clear the form
                     // Display confirmation message
-                    $('#confirmationMessage').text('Item uploaded successfully!').fadeIn().delay(3000).fadeOut();
-                    //$('#addItemForm').hide(); // Optionally hide the form after submission
+                    alert("Item uploaded successfully!");
+                    $('#addItemForm').hide(); // Optionally hide the form after submission
                 },
                 error: function (xhr, status, error) {
                     console.error("Error adding item:", error); // Log any errors
