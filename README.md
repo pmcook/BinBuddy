@@ -68,21 +68,34 @@ Windows-launch
 
 Access BinBuddy: Open a browser and visit the application at http://localhost:3000 or the computer specific IP address, such as http://192.168.1.28:3000.
 
+Or from a terminal cd into the folder and commit "node app.js"
+
 
 ## Bulk Upload
 You can upload multiple items using an Excel sheet:
 
 Template: A template Excel sheet for bulk uploads is available on the website or in the uploads folder.
-File Location: Place photos in the uploads folder if specified in the Excel sheet.
+File Location: Place photos in the uploads folder with the name of the item specified in the Excel sheet for image.
+
 Troubleshooting
 
 If you encounter issues:
 
 MongoDB connection error: Ensure MongoDB is running on localhost:27017.
 Dependencies: Run npm install again to ensure all dependencies are properly installed.
+Required programs: check mongo, git and node are all installed.
 
 
 ## Things to add
 
-- export excel back automatically 
-- adding diffrent locations
+- Export excel back automatically 
+- Adding different locations
+- Website design 
+- Add a confirmation of upload
+
+## Future project
+
+- Add LED support
+- Gridfinity support
+- Shopping list (build a list of items and print out locations)
+- Add barcode support

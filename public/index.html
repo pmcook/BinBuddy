@@ -260,7 +260,9 @@
                 success: function () {
                     fetchItems(); // Refresh the item list
                     $('#addItemForm')[0].reset(); // Clear the form
-                    $('#addItemForm').hide(); // Optionally hide the form after submission
+                    // Display confirmation message
+                    $('#confirmationMessage').text('Item uploaded successfully!').fadeIn().delay(3000).fadeOut();
+                    //$('#addItemForm').hide(); // Optionally hide the form after submission
                 },
                 error: function (xhr, status, error) {
                     console.error("Error adding item:", error); // Log any errors
